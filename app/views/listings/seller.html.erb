@@ -1,0 +1,29 @@
+
+
+<table class="table-striped table-bordered table-hover">
+  <tr>
+   	<th class="center">Image</th>
+	<th class="center">Name</th>
+	<th class="center">Description</th>
+	<th class="center">Price</th>
+	<th class="center">Action</th>
+ </tr>
+	<% @listings.each do |listing| %>
+  <tr>
+	<td><%= image_tag listing.image.url(:thumb) %></td>
+	<td><%= listing.name %></td>
+	<td><%= listing.description %></td>
+	<td><%= number_to_currency(listing.price) %></td>
+	<td>
+	 	<%= link_to "View", listing, class: "btn btn-primary" %>
+		<%= link_to "Edit", edit_listing_path(listing), class: "btn btn-primary" %>
+		<%= link_to 'Destroy', listing, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
+	</td>
+  </tr>
+  <% end %>      
+</table>
+
+<br>
+    <% if user_signed_in? %>
+        <%= link_to 'New Listing', new_listing_path, class: "btn btn-link" %>
+    <% end %>
